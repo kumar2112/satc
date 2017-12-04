@@ -81,7 +81,7 @@ class Category
     {
         return $this->title;
     }
-    
+
     protected $products;
 
     public function __construct()
@@ -95,12 +95,11 @@ class Category
     public function getProducts()
     {
         return $this->products;
-        
+
     }
-    
-    public function addProducts(RestApiBundle\Entity\Product $products ){
+
+    public function addProducts(\RestApiBundle\Entity\Product $products ){
         $this->products[]=$products;
         return $this;
     }
 }
-

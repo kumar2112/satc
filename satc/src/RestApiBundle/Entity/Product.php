@@ -52,7 +52,7 @@ class Product
     {
         return $this->name;
     }
-    
+
 //    private $category;
 //
 //    /**
@@ -77,7 +77,7 @@ class Product
 //        $this->category = $category;
 //        return $this;
 //    }
-    
+
     protected $categories;
 
     public function __construct()
@@ -91,12 +91,13 @@ class Product
     public function getCategories()
     {
         return $this->categories;
-        
+
     }
+
     
     public function addCategories(RestApiBundle\Entity\Category $categories ){
         $this->categories[]=$categories;
-        return $this;
     }
-}
 
+  
+}
