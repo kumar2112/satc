@@ -16,23 +16,23 @@ class RestCategoryController extends Controller
         if(!$cat_title){
             $cat_name=$this->generateCateGoryName($cat_title);
         }
-        
+
         $category=new Category();
         $category->setName($cat_name);
         $category->setTitle($cat_title);
         $em->persist($category);
         $em->flush();
         return new JsonResponse(array("status"=>"Success"));
-        
+
     }
-    
+
     public function getCategoryAction($id){
-         
+
     }
-    
+
     public function getAllCategoryAction(){
         $em=$this->getDoctrine()->getManager();
-        
+
         $response=array();
         $qb=$em->createQueryBuilder();
         $cat_result=$qb->select('u')
@@ -52,19 +52,23 @@ class RestCategoryController extends Controller
         }
         return new JsonResponse($response);
     }
-    
+
     public function editAction($id){
-        
+
     }
-    
-    public function deleteProductAction(){
-        
+
+    public function deleteCategoryAction($id){
+          $em=$this->getDoctrine()->getManager();
+          $category=$this->getDoctrine()->getRepository(Category::class)->find($id);
+          $em->remove($category);
+          $em->flush();
+          return new JsonResponse(array("status"=>"deleted successfuly"));
     }
-    
+
     private function generateCateGoryName($title){
         $title= strtolower($title);
         $title= str_replace(' ','-', $title);
         return $title;
-        
+
     }
 }
