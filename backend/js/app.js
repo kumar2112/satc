@@ -25,7 +25,7 @@ function getAllCategories() {
     $.ajax({
         type : 'GET',
         dataType : 'json',
-        url: 'http://symfony.projects/satc/web/app_dev.php/category/list',
+        url: 'http://symfony.projects/Repo/satc/web/app_dev.php/category/list',
         success : function(data) {
             if(data.status=="success"){
                 buildTableCategories(data.cateogries);
@@ -83,7 +83,7 @@ function getAllProducts() {
     $.ajax({
         type: 'GET',
         dataType: 'json',
-        url: 'http://symfony.projects/satc/web/app_dev.php/product/list',
+        url: 'http://symfony.projects/Repo/satc/web/app_dev.php/product/list',
         success: function (data) {
             if(data.status=="success"){
                 buildTableAllProducts(data.products);
@@ -152,7 +152,7 @@ function getAllProductsByCategoryId(categoryId) {
         data: {
             categoryId: categoryId
         },
-        url: 'http://symfony.projects/satc/web/app_dev.php/product/category/'+categoryId,
+        url: 'http://symfony.projects/Repo/satc/web/app_dev.php/product/category/'+categoryId,
         success: function (data) {
             buildTableProductsByCategory(data.products);
             updateAllProductsByCategoryCount(data.products);
@@ -275,7 +275,7 @@ function submitForm(elm){
                 type: 'POST',
                 //dataType: 'json',
                 data: data,
-                url: 'http://symfony.projects/satc/web/app_dev.php/'+endPoint+'/add',
+                url: 'http://symfony.projects/Repo/satc/web/app_dev.php/'+endPoint+'/add',
                 success: function (data) {
                     alert(data.status);
                     //elm.setAttribute("disabled",false);
