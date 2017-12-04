@@ -60,6 +60,7 @@ function buildTableCategories(data) {
             "<tr>" +
             "<td>" + obj.id +"</td>" +
             "<td>" + obj.name +"</td>" +
+            "<td><a class='btn' href='#' id='"+ obj.id +"' onclick='openCategoryModal(this)' data-mode='edit'>Edit</a> <a class='btn' href='#' id='"+ obj.id +"' onclick='deletCategory(this)'>Delete</a></td>" +
             "</tr>" );
     }
 }
@@ -126,6 +127,7 @@ function buildTableAllProducts(data) {
             "<td>" + obj.id +"</td>" +
             "<td>" + obj.name +"</td>" +
             "<td>" + productCategories + "</td>" +
+            "<td><a class='btn' href='#' id='"+ obj.id +"' onclick='deleteProduct(this)'>Delete</a></td>" +
             "</tr>" );
     }
 }
@@ -248,10 +250,33 @@ function buildCategorySelectorDropdown(data) {
 
 // ============================================
 // ==== ADD/Edit Modal Form =====================
-// 
+//
 
-function showFormModal(data){
-    
+function openCategoryModal(elm){
+        var mode=elm.getAttribute('data-mode');
+        if(mode=="add"){
+            $('#categoryModal').modal("show")
+            $('#categoryModal').on('shown.bs.modal',function(){
+                $(this).find(".modal-title").text("ADD NEW CATEGORY");
+                $('#categoryModal').find("#categoryname").val('');
+                $('#categoryModal').find("form").attr("action","http://symfony.projects/Repo/satc/web/app_dev.php/category/add");
+            });
+        }
+        if(mode=="edit"){
+            var cat_id=elm.getAttribute('id');
+            $('#categoryModal').modal("show")
+            $('#categoryModal').on('shown.bs.modal',function(){
+               $(this).find(".modal-title").text("EDIT CATEGORY");
+               $.get( "http://symfony.projects/Repo/satc/web/app_dev.php/category/"+cat_id, function( data ) {
+                    if(data.status=="success"){
+                        $('#categoryModal').find("form").attr("action","http://symfony.projects/Repo/satc/web/app_dev.php/category/edit/"+cat_id);
+                        $('#categoryModal').find("#categoryname").val(data.category.name);
+                    }
+                    
+                });
+            });
+        }
+        return false;
 }
 
 function submitForm(elm){
@@ -259,6 +284,7 @@ function submitForm(elm){
     var form=$(formId);
     var endPoint=elm.getAttribute("data-end-point");
     //elm.setAttribute("disabled",true);
+    
     form.submit(function(){
         var name=$("#"+endPoint+"name").val();
         var data;
@@ -266,16 +292,18 @@ function submitForm(elm){
             var name=$("#"+endPoint+"name").val();
             var category=$("#productcategory").val();
             data={name:name,category:category};
+            url="http://symfony.projects/Repo/satc/web/app_dev.php/product/add";
         }
         if(endPoint=="category"){
             var name=$("#"+endPoint+"name").val();
             data={name:name};
+            var url=form.attr('action');
         }
           $.ajax({
                 type: 'POST',
                 //dataType: 'json',
                 data: data,
-                url: 'http://symfony.projects/Repo/satc/web/app_dev.php/'+endPoint+'/add',
+                url: url,
                 success: function (data) {
                     alert(data.status);
                     //elm.setAttribute("disabled",false);
@@ -291,5 +319,52 @@ function submitForm(elm){
             });
         return false;
     });
-    
+    return false;
+}
+
+function deletCategory(elm){
+      var cat_id=elm.getAttribute('id');
+      $.ajax({
+            type: 'GET',
+            //dataType: 'json',
+            url: 'http://symfony.projects/Repo/satc/web/app_dev.php/category/delete/'+cat_id,
+            //url: 'http://localhost/KumarProjects/Repo/satc/satc/web/app_dev.php/'+endPoint+'/delete/'+cat_id,
+            success: function (data) {
+                alert(data.status);
+                //elm.setAttribute("disabled",false);
+                location.reload();
+            },
+            error : function (data) {
+                console.log(
+                    'Ajax Failed: Products' + '\n' +
+                    'Status Code: ' + data.status + '\n' +
+                    'StatusText: ' + data.statusText
+                );
+            }
+        });
+        return false;
+}
+
+function deleteProduct(elm){
+      var product_id=elm.getAttribute('id');
+      $.ajax({
+            type: 'GET',
+            //dataType: 'json',
+            url: 'http://symfony.projects/Repo/satc/web/app_dev.php/product/delete/'+product_id,
+            //url: 'http://localhost/KumarProjects/Repo/satc/satc/web/app_dev.php/'+endPoint+'/delete/'+cat_id,
+            success: function (data) {
+                alert(data.status);
+                //elm.setAttribute("disabled",false);
+                location.reload();
+            },
+            error : function (data) {
+                console.log(
+                    'Ajax Failed: Products' + '\n' +
+                    'Status Code: ' + data.status + '\n' +
+                    'StatusText: ' + data.statusText
+                );
+            }
+        });
+        return false;
+
 }

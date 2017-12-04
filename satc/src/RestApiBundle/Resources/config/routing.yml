@@ -1,6 +1,13 @@
 rest_api_homepage:
     path:     /
     defaults: { _controller: RestApiBundle:Default:index }
+    
+show_product:
+    path:     product/{id}
+    defaults: { _controller: RestApiBundle:RestProduct:getProduct }
+    methods:  [GET]
+    requirements:
+        id: \d+
 
 list_products:
     path:     product/list
@@ -18,6 +25,20 @@ add_product:
     path:     product/add
     defaults: { _controller: RestApiBundle:RestProduct:addProduct }
     methods:  [POST]
+    
+edit_product:
+    path:     product/edit/{id}
+    defaults: { _controller: RestApiBundle:RestProduct:editProduct }
+    methods:  [GET|POST]
+    requirements:
+        id: \d+
+
+delete_product:
+    path:     product/delete/{id}
+    defaults: { _controller: RestApiBundle:RestProduct:deleteProduct }
+    methods:  [GET]
+    requirements:
+        id: \d+
 
 add_category:
     path:     category/add
@@ -38,15 +59,16 @@ delete_category:
     requirements:
         id: \d+
 
-
+show_category:
+    path:     category/{id}
+    defaults: { _controller: RestApiBundle:RestCategory:getCategory }
+    methods:  [GET]
+    requirements:
+        id: \d+
+        
 list_categories:
     path:     category/list
     defaults: { _controller: RestApiBundle:RestCategory:getAllCategory }
     methods:  [GET]
 
-category:
-    path:     category/{$id}
-    defaults: { _controller: RestApiBundle:RestCategory:getCategory }
-    methods:  [GET]
-    requirements:
-        id: \d+
+

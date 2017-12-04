@@ -95,8 +95,9 @@ class Product
     }
 
     
-    public function addCategories(RestApiBundle\Entity\Category $categories ){
+    public function addCategories(\RestApiBundle\Entity\Category $categories ){
         $this->categories[]=$categories;
+        return $this;
     }
 
   

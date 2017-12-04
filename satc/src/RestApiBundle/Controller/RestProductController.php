@@ -12,7 +12,23 @@ class RestProductController extends Controller{
     
     
     public function getProductAction($id){
-         
+        $Product=$this->getDoctrine()->getRepository(Product::class)->find($id);
+        $product;
+        if($Product){
+            $catCollection=$Product->getCategories();
+            $category=array();
+            foreach($catCollection as $cat){
+                     $category[]=array('id'=>$cat->getId(),'name'=>$cat->getTitle());
+            }
+            $product=array("id"=>$Product->getId(),
+                            "name"=>$Product->getName(),
+                            "mainCategory"=>1,
+                            "categories"=>$category
+                        );
+            return new JsonResponse(array("status"=>"success",'product'=>$product));
+        }else{
+            return new JsonResponse(array("status"=>"no prodcut found"));
+        }
     }
     
     public function getAllProductsAction(){
@@ -79,9 +95,11 @@ class RestProductController extends Controller{
         $product=new Product();
         $productName=$request->request->get('name');
         $productCategory=$request->request->get('category');
-        foreach($productCategory as $pc){
-            $category=$this->getDoctrine()->getRepository(Category::class)->find($pc);
-            $product->addCategories($category);
+        if(count($productCategory)>0){
+            foreach($productCategory as $pc){
+                $category=$this->getDoctrine()->getRepository(Category::class)->find($pc);
+                $product->addCategories($category);
+            }
         }
         $product->setName($productName);
         $em->persist($product);
@@ -90,11 +108,28 @@ class RestProductController extends Controller{
         
     }
     
-    public function editProduct(){
-        
+    public function editProductAction(){
+        $em=$this->getDoctrine()->getManager();
+        $Product=$this->getDoctrine()->getRepository(Product::class)->find($id);
+        $productName=$request->request->get('name');
+        $productCategory=$request->request->get('category');
+        if(count($productCategory)>0){
+            foreach($productCategory as $pc){
+                $category=$this->getDoctrine()->getRepository(Category::class)->find($pc);
+                $Product->addCategories($category);
+            }
+        }
+        $Product->setName($productName);
+        $em->persist($Product);
+        $em->flush();
+        return new JsonResponse(array("status"=>"Success"));
     }
     
-    public function deleteProduct(){
-        
+    public function deleteProductAction($id){
+        $em=$this->getDoctrine()->getManager();
+        $prodcut=$this->getDoctrine()->getRepository(Product::class)->find($id);
+        $em->remove($prodcut);
+        $em->flush();
+        return new JsonResponse(array("status"=>"deleted successfuly"));
     }
 }
