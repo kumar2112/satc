@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+
+body {
+    border-top: 5px solid #554462;
+    font-family: 'Roboto', sans-serif;
+}
+.page-wrap {
+    padding: 20px;
+}
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+}
+h2 {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+hr.sep {
+    border-top: 3px solid #554462;
+}
+
+.products-by-category .title {
+    float: left;
+}
+
+#categorySelectorWrap {
+    margin-top: 20px;
+    float: right;
+}
+
+#currentCategory {
+    color: #554462;
+    text-transform: none;
+}
+
+
+.btn-primary {
+    background-color: #554462;
+    border-color: #554462;
+}
+.btn-primary:hover,
+.btn-primary.active:focus,
+.btn-primary:focus ,
+.open > .dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+    background-color: #9270ad;
+    border-color: #9270ad;
+}

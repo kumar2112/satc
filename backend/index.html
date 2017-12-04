@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GR Test</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1><strong>GR</strong>Dash</h1>
+    </header>
+
+    <main class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    Add New Category
+                </a>
+                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    Add New Product
+                 </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <section class="categories">
+                <h2>All Categories (<span id="countAllCategories">0</span>)</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBodyCategories">
+
+                    </tbody>
+                </table>
+                </section>
+            </div>
+
+            <div class="col-xs-12 col-sm-8">
+                <section class="products">
+                    <h2>All Products (<span id="countAllProducts">0</span>)</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Categories</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableBodyAllProducts">
+
+                        </tbody>
+                    </table>
+                </section>
+            </div> <!-- END: col -->
+        </div> <!-- END: row -->
+
+        <hr class="sep">
+
+
+        <section class="products-by-category">
+            <h2 class="title">
+                Products by Category (<span id="countAllProductsByCategory">0</span>) -
+                <span id="currentCategory">All Categories</span>
+            </h2>
+            <div id="categorySelectorWrap" class="dropdown">
+
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category Selector
+                    <span class="caret"></span></button>
+                <ul id="categoryList" class="dropdown-menu dropdown-menu-right">
+                    <li>All Categories</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                </ul>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category Name</th>
+                </tr>
+                </thead>
+                <tbody id="tableBodyProductsByCategory">
+
+                </tbody>
+            </table>
+        </section>
+
+
+
+    </main>  <!-- END: container -->
+    <div id="productModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+             <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Product</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="addProductForm">
+                                <div class="form-group">
+                                    <label for="productname">Enter product name</label>
+                                    <input type="text" name="productname" id="productname" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productcategory">Select Category(Press Ctrl for select Multiple)</label>
+                                    <select name="productcategory" id="productcategory" class="form-control" multiple>
+                                    </select>
+                                </div>
+                                <div class="form-group text-right">
+                                    <input type="submit" name="productname" id="addProductButton" value="ADD" class="btn btn-default" data-form-id="#addProductForm" data-end-point="product" onclick="submitForm(this)">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div id="categoryModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+             <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Category</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="addCategoryForm">
+                                <div class="form-group">
+                                    <label for="categoryname">Enter category name</label>
+                                    <input type="text" name="categoryname" id="categoryname" class="form-control" required>
+                                </div>
+                                <div class="form-group text-right">
+                                    <input type="submit"  id="addCategoryButton" value="ADD CATEGORY" class="btn btn-default" data-form-id="#addCategoryForm" data-end-point="category" onclick="submitForm(this)">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/app.js"></script>
+</html>

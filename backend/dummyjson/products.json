@@ -1,0 +1,94 @@
+[
+    {
+        "id": 1,
+        "name": "Original MacBook Pro 2017",
+        "mainCategory": 1,
+        "categories": [
+            {
+                "id": 5,
+                "name": "Computer Systems"
+            },
+            {
+                "id": 12,
+                "name": "Keyboards"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Sunglasses (no cat)",
+        "categories": [
+
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Wifi Smart switch",
+        "mainCategory": 1,
+        "categories": [
+            {
+                "id": "1",
+                "name": "Music"
+            },
+            {
+                "id": "7",
+                "name": "Gadgets"
+            },
+            {
+                "id": "8",
+                "name": "Smart Switches"
+            },
+            {
+                "id": "12",
+                "name": "Keyboards"
+            }
+        ]
+    },
+    {
+        "id": 333,
+        "name": "Camera Pen",
+        "mainCategory": 1,
+        "categories": [
+            {
+                "id": "2",
+                "name": "Surveillance Gadgets"
+            }
+        ]
+    },
+    {
+        "id": 71,
+        "name": "iPhone X",
+        "mainCategory": 1,
+        "categories": [
+            {
+                "id": "1",
+                "name": "Music"
+            },
+            {
+                "id": "5",
+                "name": "Computer Systems"
+            },
+            {
+                "id": "7",
+                "name": "Gadgets"
+            }
+        ]
+    },
+    {
+        "id": 89,
+        "name": "Smart Clock",
+        "mainCategory": 1,
+        "categories": [
+            {
+                "id": "20",
+                "name": "Clocks"
+            },
+            {
+                "id": "7",
+                "name": "Gadgets"
+            }
+        ]
+    }
+
+
+]

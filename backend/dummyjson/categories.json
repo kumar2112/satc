@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "name": "Music"
+    },
+    {
+        "id": "2",
+        "name": "Surveillance Gadgets"
+    },
+    {
+        "id": "3",
+        "name": "Weather Meters"
+    },
+    {
+        "id": "4",
+        "name": "Toys & Hobbies"
+    },
+    {
+        "id": "5",
+        "name": "Computer Systems"
+    },
+    {
+        "id": "20",
+        "name": "Clocks"
+    },
+    {
+        "id": "7",
+        "name": "Gadgets"
+    },
+    {
+        "id": "8",
+        "name": "Smart Switches"
+    },
+    {
+        "id": "12",
+        "name": "Keyboards"
+    }
+]

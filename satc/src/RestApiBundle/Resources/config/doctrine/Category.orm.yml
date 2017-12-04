@@ -1,0 +1,26 @@
+RestApiBundle\Entity\Category:
+    type: entity
+    table: category
+    repositoryClass: RestApiBundle\Repository\CategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '255'
+        title:
+            type: string
+            length: '255'
+#    oneToMany:
+#        products:
+#            targetEntity: RestApiBundle\Entity\Product
+#            mappedBy: category
+    manyToMany:
+        products:
+          targetEntity: RestApiBundle\Entity\Product
+          mappedBy: categories   
+    lifecycleCallbacks: {  }

@@ -1,0 +1,27 @@
+RestApiBundle\Entity\Product:
+    type: entity
+    table: product
+    repositoryClass: RestApiBundle\Repository\ProductRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '255'
+    manyToMany:
+        categories:
+            targetEntity: RestApiBundle\Entity\Category
+            inversedBy: products
+            joinTable:
+                name: productcategories
+                joinColumns:
+                  pid:
+                    referencedColumnName: id
+                inverseJoinColumns:
+                  cid:
+                    referencedColumnName: id
+    lifecycleCallbacks: {  }
